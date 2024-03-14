@@ -7,17 +7,29 @@ document.addEventListener('DOMContentLoaded', (e) => {
       newJoke.innerText = data.setup;
       jokePlace.append(newJoke);
 
-      setTimeout(() => {
-        const newPunchline = document.createElement('p');
-        newPunchline.setAttribute('id', 'new-joke');
-        newPunchline.innerText = data.punchline;
-        jokePlace.appendChild(newPunchline);
-      }, 5000);
+      const newPunchline = document.createElement('p');
+      newPunchline.setAttribute('id', 'new-joke');
+      newPunchline.innerText = data.punchline;
+
+      setTimeout(() => jokePlace.appendChild(newPunchline), 5000);
+
+      button.addEventListener('click', (e) => {
+        fetch('https://official-joke-api.appspot.com/jokes/random')
+          .then((data) => data.json())
+          .then((data) => {
+            newJoke.innerText = data.setup;
+            newPunchline.innerText = '';
+
+            setTimeout(() => (newPunchline.innerText = data.punchline), 5000);
+          });
+      });
+      // });
     });
-  // });
 
   // const randomJoke = document.getElementById("random-joke");
   const jokePlace = document.getElementById('joke-place');
+
+  let button = document.querySelector('button');
 
   // async function fetchData() {
   //   const result = await fetch('https://official-joke-api.appspot.com/jokes/random');
