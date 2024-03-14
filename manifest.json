@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "hello",
+  "name": "Joke-time",
   "description": "MVP",
   "version": "1.0",
   "action": {
